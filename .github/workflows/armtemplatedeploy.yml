@@ -24,18 +24,24 @@ jobs:
           scope: subscription
           subscriptionId: 8bf5716e-cbb9-4bef-86f6-42ed7d1a872a
           region: West Europe
-          template: ./arm-templates/resourcegroup.json
+          template:
+          parameters:
+            location="West Europe"
+            resourceGroupName=rg-githubactions  
           deploymentName: rg-githubactions
 
       - name: Deploy Storage Account
         uses: Azure/arm-deploy@v1
+        id: storageAccountDeploy
         with:
             scope: resourcegroup
             resourceGroupName: rg-githubactions
             subscriptionId: 8bf5716e-cbb9-4bef-86f6-42ed7d1a872a
             template: ./arm-templates/storageaccount.json
             parameters: 
-              ./arm-templates/storageaccount.parameters.json
+              sku=Standard_LRS
               storageAccountName=robbinbrewster02
               location="West Europe"
-            deploymentMode: incremental    
+            deploymentMode: incremental 
+            
+      - run : echo ${{ steps.storageAccountDeploy.outputs.BlobUri}}      
