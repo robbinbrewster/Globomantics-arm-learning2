@@ -28,8 +28,7 @@ jobs:
           parameters:
             location="West Europe"
             resourceGroupName=rg-githubactions  
-          deploymentName: rg-githubactions
-
+          
       - name: Deploy Storage Account
         uses: Azure/arm-deploy@v1
         id: storageAccountDeploy
