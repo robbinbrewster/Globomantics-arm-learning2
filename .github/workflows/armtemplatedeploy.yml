@@ -24,7 +24,7 @@ jobs:
           scope: subscription
           subscriptionId: 8bf5716e-cbb9-4bef-86f6-42ed7d1a872a
           region: West Europe
-          template: ./arm-templates/sresourcegroup.json
+          template: ./arm-templates/resourcegroup.json
           deploymentName: rg-githubactions
           
       - name: Deploy Storage Account
