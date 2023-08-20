@@ -24,10 +24,8 @@ jobs:
           scope: subscription
           subscriptionId: 8bf5716e-cbb9-4bef-86f6-42ed7d1a872a
           region: West Europe
-          template:
-          parameters:
-            location="West Europe"
-            resourceGroupName=rg-githubactions  
+          template: ./arm-templates/sresourcegroup.json
+          deploymentName: rg-githubactions
           
       - name: Deploy Storage Account
         uses: Azure/arm-deploy@v1
