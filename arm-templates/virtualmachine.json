@@ -13,7 +13,7 @@
             "metadata": {
                 "description": "Enter the location to deploy the resources to"
             }
-        }  
+        }
     },
     "functions": [],
     "variables": {},

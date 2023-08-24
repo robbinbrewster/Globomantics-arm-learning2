@@ -9,7 +9,7 @@ on:
 env:
   resource_group_name: rg-githubactions
   location: West Europe
-  sbscriptionID: 8bf5716e-cbb9-4bef-86f6-42ed7d1a872a
+  subscriptionID: 8bf5716e-cbb9-4bef-86f6-42ed7d1a872a
  
 jobs:
   armDeploy:
@@ -27,7 +27,7 @@ jobs:
         uses: Azure/arm-deploy@v1
         with:
           scope: subscription
-          subscriptionId: ${{ env.sbscriptionID}}
+          subscriptionId: ${{ env.subscriptionID}}
           region: "${{ env.location }}"
           template: ./arm-templates/resourcegroup.json
           deploymentName: ${{ env.resource_group_name }}
@@ -38,7 +38,7 @@ jobs:
         with:
             scope: resourcegroup
             resourceGroupName: ${{ env.resource_group_name }}
-            subscriptionId: ${{ env.sbscriptionID}}
+            subscriptionId: ${{ env.subscriptionID}}
             template: ./arm-templates/storageaccount.json
             parameters: ./arm-templates/storageaccount.parameters.json
             deploymentMode: incremental 
@@ -49,10 +49,10 @@ jobs:
         with:
            scope: resourcegroup
            resourceGroupName: ${{ env.resource_group_name }}
-           subscriptionId: ${{ env.sbscriptionID}}
+           subscriptionId: ${{ env.subscriptionID}}
            template: ./arm-templates/virtualmachine.json
            parameters: 
             adminPassword=${{ secrets.UBUNTU_ADMIN_PASSWORD }}
-            location= "${{ env.location }}"
+            location="${{ env.location }}"
            deploymentMode: incremental       
     
