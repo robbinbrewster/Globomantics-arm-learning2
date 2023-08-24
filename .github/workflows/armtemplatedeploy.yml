@@ -8,7 +8,7 @@ on:
 
 env:
   resource_group_name: rg-githubactions
-  location: "West Europe"
+  location: West Europe
   sbscriptionID: 8bf5716e-cbb9-4bef-86f6-42ed7d1a872a
  
 jobs:
@@ -28,7 +28,7 @@ jobs:
         with:
           scope: subscription
           subscriptionId: ${{ env.sbscriptionID}}
-          region: ${{ env.location }}
+          region: "${{ env.location }}"
           template: ./arm-templates/resourcegroup.json
           deploymentName: ${{ env.resource_group_name }}
           
@@ -53,6 +53,6 @@ jobs:
            template: ./arm-templates/virtualmachine.json
            parameters: 
             adminPassword=${{ secrets.UBUNTU_ADMIN_PASSWORD }}
-            location= ${{ env.location }}
+            location= "${{ env.location }}"
            deploymentMode: incremental       
     
