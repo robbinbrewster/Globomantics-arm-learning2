@@ -6,6 +6,11 @@ on:
       - main
   workflow_dispatch:
 
+env:
+  resource_group_name: rg-githubactions
+  location: "West Europe"
+  sbscriptionID: 8bf5716e-cbb9-4bef-86f6-42ed7d1a872a
+ 
 jobs:
   armDeploy:
     runs-on: ubuntu-latest
@@ -18,22 +23,22 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Deploy Resource Group rg-githubactions
+      - name: Deploy Resource Group ${{ env.resource_group_name }}
         uses: Azure/arm-deploy@v1
         with:
           scope: subscription
-          subscriptionId: 8bf5716e-cbb9-4bef-86f6-42ed7d1a872a
-          region: West Europe
+          subscriptionId: ${{ env.sbscriptionID}}
+          region: ${{ env.location }}
           template: ./arm-templates/resourcegroup.json
-          deploymentName: rg-githubactions
+          deploymentName: ${{ env.resource_group_name }}
           
       - name: Deploy Storage Account
         uses: Azure/arm-deploy@v1
         id: storageAccountDeploy
         with:
             scope: resourcegroup
-            resourceGroupName: rg-githubactions
-            subscriptionId: 8bf5716e-cbb9-4bef-86f6-42ed7d1a872a
+            resourceGroupName: ${{ env.resource_group_name }}
+            subscriptionId: ${{ env.sbscriptionID}}
             template: ./arm-templates/storageaccount.json
             parameters: ./arm-templates/storageaccount.parameters.json
             deploymentMode: incremental 
@@ -43,10 +48,11 @@ jobs:
         uses: Azure/arm-deploy@v1
         with:
            scope: resourcegroup
-           resourceGroupName: rg-githubactions
-           subscriptionId: 8bf5716e-cbb9-4bef-86f6-42ed7d1a872a
+           resourceGroupName: ${{ env.resource_group_name }}
+           subscriptionId: ${{ env.sbscriptionID}}
            template: ./arm-templates/virtualmachine.json
            parameters: 
             adminPassword=${{ secrets.UBUNTU_ADMIN_PASSWORD }}
+            location= ${{ env.location }}
            deploymentMode: incremental       
     
