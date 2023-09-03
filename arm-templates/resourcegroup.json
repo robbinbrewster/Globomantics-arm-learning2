@@ -14,7 +14,7 @@
             "metadata": {
                 "description": "Enter the name for the resource group"
             },
-            "defaultValue": "rg-githubactions"
+            "defaultValue": "rg-stg-githubactions"
         }
     },
     "functions": [],
@@ -32,4 +32,5 @@
         }
     ],
     "outputs": {}
+    // test
 }
