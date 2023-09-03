@@ -67,7 +67,7 @@ jobs:
     name: Deploy to Prodcution
     runs-on: ubuntu-latest
     env:
-              resource_group_name: rg--prod-githubactions
+              resource_group_name: rg-prod-githubactions
               location: West Europe
               environment:
               name: production
