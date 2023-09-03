@@ -70,8 +70,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       resource_group_name: rg-prod-githubactions
-      location: Australia Central
-    environment:
+      location: West Europe
+      environment:
       name: production
       
     needs: armDeployStaging
